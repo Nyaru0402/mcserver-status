@@ -3,7 +3,6 @@ import { ApplicationCommandOption, TextChannel } from 'discord.js';
 import { statusLegacy } from 'minecraft-server-util';
 
 import { ServerConfig } from './types';
-import servers from './servers.json';
 
 const client = new Client();
 
@@ -20,8 +19,8 @@ client.once('ready', async () => {
   await client.application?.commands.set(commands);
   await client.start();
 
-  setInterval(() => {
-    servers.forEach((server: ServerConfig) => {
+  setInterval(async () => {
+    (await import("./servers.json")).forEach((server: ServerConfig) => {
       const channel = client.channels.cache.get(
         server.DiscordChannelID
       ) as TextChannel;
