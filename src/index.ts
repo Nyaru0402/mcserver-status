@@ -46,4 +46,4 @@ client.once('ready', async () => {
 
 client.on('messageCreate', (message) => {});
 
-client.login('your token').catch(console.error);
+client.login(process.env.DISCORD_BOT_TOKEN).catch(console.error);
