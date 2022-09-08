@@ -7,8 +7,8 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 
 export class Command {
-  public name: string;
-  public options: CommandOptions;
+  public name!: string;
+  public options!: CommandOptions;
   addName(name: string): this {
     this.name = name;
     return this;
@@ -21,7 +21,7 @@ export class Command {
 
 export interface CommandOptions {
   description: string;
-  options?: ApplicationCommandOption;
+  options?: ApplicationCommandOption[] | never[];
   run: (interaction: CommandInteraction) => Promise<void>;
 }
 

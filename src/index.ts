@@ -1,5 +1,5 @@
 import { Client } from './client';
-import { TextChannel } from 'discord.js';
+import { ApplicationCommandOption, TextChannel } from 'discord.js';
 import { statusLegacy } from 'minecraft-server-util';
 
 import { ServerConfig } from './types';
@@ -8,15 +8,17 @@ import servers from './servers.json';
 const client = new Client();
 
 client.once('ready', async () => {
-  const commands = [...client.commandManager.keys()].map((key) => {
+  const commands = [...client.commandManager.keys()].map((key: string) => {
     return {
       name: key,
-      description: client.commandManager?.get(key)?.description,
-      options: client.commandManager?.get(key)?.options ?? [],
+      description: client.commandManager.get(key)?.description as string,
+      options: client.commandManager.get(key)
+        ?.options as ApplicationCommandOption[],
     };
   });
 
   await client.application?.commands.set(commands);
+  await client.start();
 
   setInterval(() => {
     servers.forEach((server: ServerConfig) => {
@@ -43,3 +45,5 @@ client.once('ready', async () => {
 });
 
 client.on('messageCreate', (message) => {});
+
+client.login('your token').catch(console.error);
