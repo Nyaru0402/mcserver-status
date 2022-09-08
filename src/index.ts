@@ -34,11 +34,11 @@ client.once('ready', async () => {
           const { version, players, motd, srvRecord } = result;
 
           channel?.setTopic(
-            `:GREEN_CIRCLE: ${players.online}/${players.max} players online | version : ${version?.name}`
+            `🟢 ${players.online}/${players.max} players online | version : ${version?.name}`
           );
         })
         .catch((error) => {
-          channel?.setTopic(`:RED_CIRCLE: ${error}`);
+          channel?.setTopic(`🔴 ${error}`);
         });
     });
   }, 60 * 10 * 1000);
