@@ -34,7 +34,7 @@ client.once('ready', async () => {
           const { version, players, motd, srvRecord } = result;
 
           channel?.setTopic(
-            `🟢 ${players.online}/${players.max} players online | version : ${version?.name}`
+            `🟢 ${players.online}/${players.max} players online | version : ${version?.name} | Last update : ${new Date().toString()}`
           );
         })
         .catch((error) => {
