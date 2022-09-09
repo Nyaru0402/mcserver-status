@@ -20,7 +20,7 @@ client.once('ready', async () => {
   await client.start();
 
   setInterval(async () => {
-    (await import("./servers.json")).forEach((server: ServerConfig) => {
+    (await import("./servers.json")).default.forEach((server: ServerConfig) => {
       const channel = client.channels.cache.get(
         server.DiscordChannelID
       ) as TextChannel;
