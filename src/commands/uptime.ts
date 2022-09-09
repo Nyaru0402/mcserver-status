@@ -48,13 +48,13 @@ export const { name, options } = new Command().addName('uptime').addOptions({
           port,
           DiscordChannelID: interaction.channelId as Snowflake,
         });
-    }
-    writeFileSync(join(__dirname, '../servers.json'), JSON.stringify(servers));
+    }   
     statusLegacy(address, port, { enableSRV: true })
       .then(async (res) => {
         await interaction.editReply(
           `The server info has been updated\naddress: ${address}\nport: ${port}\nversion: ${res.version?.name}\nplayers: ${res.players.online}/${res.players.max}`
         );
+        writeFileSync(join(__dirname, '../servers.json'), JSON.stringify(servers));
       })
       .catch(
         async () =>
