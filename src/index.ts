@@ -28,15 +28,13 @@ client.once('ready', async () => {
       statusLegacy(server.address, server.port, {
         enableSRV: true,
       })
-        .then((result) => {
-          const { version, players, motd, srvRecord } = result;
-
+        .then(({ version, players}) => {
           channel?.setTopic(
             `🟢 ${players.online}/${players.max} players online | version : ${version?.name} | Last update : ${new Date().toString()}`
           );
         })
         .catch((error) => {
-          channel?.setTopic(`🔴 ${error}`);
+          channel?.setTopic(`🔴 ${error} | ${new Date().toString()}`);
         });
     });
   }, 60 * 10 * 1000);
