@@ -26,7 +26,6 @@ client.once('ready', async () => {
       ) as TextChannel;
 
       statusLegacy(server.address, server.port, {
-        timeout: 10 * 1000,
         enableSRV: true,
       })
         .then((result) => {
