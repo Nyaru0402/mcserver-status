@@ -41,13 +41,14 @@ export const { name, options } = new Command().addName('uptime').addOptions({
         DiscordChannelID: interaction.channelId as Snowflake,
       });
     } else {
-      servers
-        .filter((s: ServerConfig) => s.address !== server.address)
-        .push({
-          address,
-          port,
-          DiscordChannelID: interaction.channelId as Snowflake,
-        });
+      servers = servers
+        .filter((s: ServerConfig) => s.address !== server.address);
+        
+       servers.push({
+         address,
+         port,
+         DiscordChannelID: interaction.channelId as Snowflake,
+       });
     }   
     statusLegacy(address, port, { enableSRV: true })
       .then(async (res) => {
